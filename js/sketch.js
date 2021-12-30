@@ -1,28 +1,43 @@
+var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, mid, sheep
 
-var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b 
+const rainDropCount = 1000;
+const size = 2;
+const gravity = 2;
+
+var rainDrops = [];
 
 function setup() {
     var canvas = createCanvas(1600, 900);
     canvas.parent("p5container");
+    
+    for(let i = 0; i < rainDropCount; i++){
+        
+        rainDrops.push({
+            x: random(width),
+            y: random(height) 
+      });
+    }
 }
 
 function draw() {
-console.log(mouseX)
-    sheepX = width/2
+    sheep=true
+    sheepX = 800
     sheepY = height/2
     sheepWidth = 27
     sheepHeight = 30
     r = 255
     g = 67
     b = 0
+    mid = width/2
 
-    if(mouseX <= sheepX-534){
+    //color borders for sky
+    if(mouseX <= mid-600){
         r = 255, g = 67, b = 0;
-    }else if(mouseX <= sheepX-250){
+    }else if(mouseX <= mid-400){
         r = 255, g = 167, b = 0;
-    }else if(mouseX >= sheepX+168){
-        r = 255, g = 167, b = 0;
-    }else if(sheepX-534 < mouseX <= sheepX-368){
+    }else if(mouseX >= mid+350){
+        r = 69, g = 82, b = 112;
+    }else if(mid-534 < mouseX <= mid-368){
         r = 128, g = 222, b = 234;  
     }
     noStroke();
@@ -103,19 +118,51 @@ console.log(mouseX)
     fill(255);
     quad(1207,800,1197,785,1337,695,1337,715);
     //sheep
+     if(keyIsDown(LEFT_ARROW)){
       fill(0);
-    ellipse(sheepX-170,sheepY+295,sheepWidth);
-    ellipse(sheepX-210,sheepY+320,sheepHeight-22,sheepWidth);
-    ellipse(sheepX-205,sheepY+320,sheepHeight-22,sheepWidth);
-    ellipse(sheepX-190,sheepY+320,sheepHeight-22,sheepWidth);
-    ellipse(sheepX-185,sheepY+320,sheepHeight-22,sheepWidth);
-    fill(255)
-    ellipse(sheepX-200,sheepY+310,sheepWidth+3);
-    ellipse(sheepX-205,sheepY+303,sheepWidth+3);
-    ellipse(sheepX-200,sheepY+300,sheepWidth+3);
-    ellipse(sheepX-190,sheepY+300,sheepWidth+3);
-    ellipse(sheepX-190,sheepY+309,sheepWidth+3);
-    ellipse(sheepX-189,sheepY+304,sheepWidth+3);
-  
-    
+      ellipse(sheepX-222,sheepY+295,sheepWidth);
+      ellipse(sheepX-175,sheepY+307,sheepWidth-10);
+      ellipse(sheepX-210,sheepY+320,sheepHeight-22,sheepWidth);
+      ellipse(sheepX-205,sheepY+320,sheepHeight-22,sheepWidth);
+      ellipse(sheepX-190,sheepY+320,sheepHeight-22,sheepWidth);
+      ellipse(sheepX-185,sheepY+320,sheepHeight-22,sheepWidth);
+      fill(255)
+      ellipse(sheepX-200,sheepY+310,sheepWidth+3);
+      ellipse(sheepX-205,sheepY+303,sheepWidth+3);
+      ellipse(sheepX-200,sheepY+300,sheepWidth+3);
+      ellipse(sheepX-190,sheepY+300,sheepWidth+3);
+      ellipse(sheepX-190,sheepY+309,sheepWidth+3);
+      ellipse(sheepX-189,sheepY+304,sheepWidth+3);
+    }else if(sheep=true){
+      fill(0);
+      ellipse(sheepX-170,sheepY+295,sheepWidth);
+      ellipse(sheepX-217,sheepY+307,sheepWidth-10);
+      ellipse(sheepX-210,sheepY+320,sheepHeight-22,sheepWidth);
+      ellipse(sheepX-205,sheepY+320,sheepHeight-22,sheepWidth);
+      ellipse(sheepX-190,sheepY+320,sheepHeight-22,sheepWidth);
+      ellipse(sheepX-185,sheepY+320,sheepHeight-22,sheepWidth);
+      fill(255)
+      ellipse(sheepX-200,sheepY+310,sheepWidth+3);
+      ellipse(sheepX-205,sheepY+303,sheepWidth+3);
+      ellipse(sheepX-200,sheepY+300,sheepWidth+3);
+      ellipse(sheepX-190,sheepY+300,sheepWidth+3);
+      ellipse(sheepX-190,sheepY+309,sheepWidth+3);
+      ellipse(sheepX-189,sheepY+304,sheepWidth+3);
+    }
+    //rain
+    if(keyIsDown(82)){
+      raining=true;
+      noStroke();
+      fill(50,50,255);
+      for(let i = 0; i < rainDrops.length; i++){
+      var rainDrop = rainDrops[i];
+      rect(rainDrop.x,rainDrop.y,size,10);
+
+      if(rainDrop.y > height + size){
+        rainDrop.y = -size
+      } else {
+        rainDrop.y += gravity
+      }
+      }
+    }
 }
