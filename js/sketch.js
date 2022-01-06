@@ -1,4 +1,4 @@
-var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, mid, sheep, img
+var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, midx, midy, sheep, img
 
 const rainDropCount = 1000;
 const size = 2;
@@ -33,16 +33,17 @@ function draw() {
     r = 255
     g = 67
     b = 0
-    mid = width/2
+    midx = width/2
+    midy = height/2
 
     //color borders for sky
-    if(mouseX <= mid-600){
+    if(mouseX <= midx-600){
         r = 255, g = 67, b = 0;
-    }else if(mouseX <= mid-400){
+    }else if(mouseX <= midx-400){
         r = 255, g = 167, b = 0;
-    }else if(mouseX >= mid+350){
+    }else if(mouseX >= midx+350){
         r = 69, g = 82, b = 112;
-    }else if(mid-534 < mouseX <= mid-368){
+    }else if(midx-534 < mouseX <= midx-368){
         r = 128, g = 222, b = 234;  
     }
 
@@ -172,6 +173,25 @@ function draw() {
       ellipse(sheepX-190,sheepY+309,sheepWidth+3);
       ellipse(sheepX-189,sheepY+304,sheepWidth+3);
     }
+
+    //pig
+    fill(255,192,203)
+    ellipse(midx-600, midy+300, 150, 75);
+    ellipse(midx-525, midy+273, 75, 60);
+    ellipse(midx-550, midy+340, 20, 50);
+    ellipse(midx-575, midy+340, 20, 50);
+    ellipse(midx-625, midy+340, 20, 50);
+    ellipse(midx-650, midy+340, 20, 50);
+    triangle(midx-550,midy+255,midx-525,midy+255,midx-540,midy+215);
+    triangle(midx-525,midy+255,midx-500,midy+255,midx-515,midy+215);
+    fill(255,150,180);
+    ellipse(midx-490,midy+277, 30, 25);
+    fill(98,67,33);
+    ellipse(midx-550, midy+360, 15, 10);
+    ellipse(midx-575, midy+360, 15, 10);
+    ellipse(midx-625, midy+360, 15, 10);
+    ellipse(midx-650, midy+360, 15, 10);
+
     //rain
     if(keyIsDown(82)){
       raining=true;
@@ -181,11 +201,11 @@ function draw() {
       var rainDrop = rainDrops[i];
       rect(rainDrop.x,rainDrop.y,size,10);
 
-      if(rainDrop.y > height + size){
-        rainDrop.y = -size
-        } else {
-        rainDrop.y += gravity
-        }
+    if(rainDrop.y > height + size){
+      rainDrop.y = -size
+      } else {
+      rainDrop.y += gravity
       }
     }
+  }
 }
