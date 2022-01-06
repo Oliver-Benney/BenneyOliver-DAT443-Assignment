@@ -12,9 +12,12 @@ body{
     height: 100vh;
     justify-content: center;
     align-items: center;
+    background-color: #61a858;
 }
 
 h1{
     text-align: center;
     padding-bottom: 10px;
+    font-size: 50px;
+    font-family: 'Licorice', cursive;
 }

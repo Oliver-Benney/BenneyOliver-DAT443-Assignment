@@ -1,10 +1,14 @@
-var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, mid, sheep
+var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, mid, sheep, img
 
 const rainDropCount = 1000;
 const size = 2;
 const gravity = 2;
 
 var rainDrops = [];
+
+function preload(){
+  img = loadImage("img/bg.jpg")
+}
 
 function setup() {
     var canvas = createCanvas(1600, 900);
@@ -20,6 +24,7 @@ function setup() {
 }
 
 function draw() {
+   
     sheep=true
     sheepX = 800
     sheepY = height/2
@@ -40,13 +45,17 @@ function draw() {
     }else if(mid-534 < mouseX <= mid-368){
         r = 128, g = 222, b = 234;  
     }
+
     noStroke();
+
     //sky
     fill(r,g,b);
     rect(0,0,width,2*height/3);
+
     //grass
     fill(120,160,90);
     rect(0,2*height/3, width, height/3);
+
     //fence
     fill(98,67,33);
     rect(0,550,10,85);
@@ -91,32 +100,46 @@ function draw() {
     rect(1560,550,10,85);
     rect(1599,550,10,85);
     rect(0,575,width,10);
+
     //rect of barn
     fill(255,0,0);
     rect(1100,650,350,150);
+
     //roof of barn
     fill(130,67,33);
     quad(1275,430,1080,650,1080,650,1470,650);
+
     //triangle of barn
     fill(255,0,0);
     quad(1275,450,1100,650,1100,650,1450,650);
+
     //border of top window
     fill(255);
     rect(1237,540,70);
+
     //black square of top window
     fill(0);
     rect(1247,550,50);
+
     //border of door
     fill(255);
     rect(1187,680,170,120);
+
     //door
     fill(255,0,0);
     rect(1207,700,130,100);
+
     //xs across door
     fill(255);
     quad(1187,700,1197,685,1347,790,1337,800);
     fill(255);
     quad(1207,800,1197,785,1337,695,1337,715);
+
+    //image for new background
+    if(keyIsDown(66)){
+      image(img,0,0,width,height);
+    } 
+
     //sheep
      if(keyIsDown(LEFT_ARROW)){
       fill(0);
@@ -160,9 +183,9 @@ function draw() {
 
       if(rainDrop.y > height + size){
         rainDrop.y = -size
-      } else {
+        } else {
         rainDrop.y += gravity
-      }
+        }
       }
     }
 }
