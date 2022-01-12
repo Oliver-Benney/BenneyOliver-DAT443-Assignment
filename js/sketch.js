@@ -53,7 +53,7 @@ function draw() {
     fill(r,g,b);
     rect(0,0,width,2*height/3);
 
-    //color borders for sky
+    //color borders for sun
     if(mouseX <= midx-600){
         a = 255, c = 100, d = 0;
     }else if(mouseX <= midx-400){
