@@ -1,8 +1,8 @@
-var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, midx, midy, sheep, img
+var sheepX, sheepY, sheepHeight, sheepWidth, r, g, b, midx, midy, sheep, img, a, c, d
 
 const rainDropCount = 1000;
 const size = 2;
-const gravity = 2;
+const gravity = 5;
 
 var rainDrops = [];
 
@@ -24,7 +24,9 @@ function setup() {
 }
 
 function draw() {
-   
+
+    noStroke();
+
     sheep=true
     sheepX = 800
     sheepY = height/2
@@ -47,11 +49,25 @@ function draw() {
         r = 128, g = 222, b = 234;  
     }
 
-    noStroke();
-
     //sky
     fill(r,g,b);
     rect(0,0,width,2*height/3);
+
+    //color borders for sky
+    if(mouseX <= midx-600){
+        a = 255, c = 100, d = 0;
+    }else if(mouseX <= midx-400){
+        a = 255, c = 200, d = 0;
+    }else if(mouseX >= midx+350){
+        a = 255, c = 255, d = 255;
+    }else if(midx-534 < mouseX <= midx-368){
+        a = 255, c = 255, d = 20;  
+    }
+
+    //sun
+    fill(a,c,d);
+    let x1 = map(mouseX, 0, 1600, 0, 1600,true);
+    ellipse(x1,100,100);
 
     //grass
     fill(120,160,90);
@@ -136,9 +152,38 @@ function draw() {
     fill(255);
     quad(1207,800,1197,785,1337,695,1337,715);
 
+    //Left Haybale
+    fill(255,212,1);
+    ellipse(1050,750,100);
+    fill(251,177,23);
+    ellipse(1050,750,80);
+    fill(255,212,1);
+    ellipse(1050,750,75);
+    fill(251,177,23);
+    ellipse(1050,750,40);
+    fill(255,212,1);
+    ellipse(1050,750,35);
+
+    //Right Haybale
+    rect(1450,730,90,70);
+    fill(255,100,0);
+    rect(1450,750,90,5);
+    rect(1450,780,90,5);
+
     //image for new background
     if(keyIsDown(66)){
       image(img,0,0,width,height);
+      fill(255)
+      rect(1010,780,25)
+      rect(1020,800,40)
+      rect(1060,805,5,30)
+      fill(255,0,0)
+      rect(1005,800,5,10)
+      fill(255,255,0)
+      rect(1000,790,10)
+      rect(1030,840,5,20)
+      rect(1045,840,5,20)
+      rect(1020,860,30,5)
     } 
 
     //sheep
